@@ -53,11 +53,11 @@ A RESTful API for managing books. This API allows you to perform CRUD operations
 
 
 ## Technologies Used
-Node.js: Backend runtime
-Express.js: Framework for building the REST API
-MongoDB: NoSQL database for storing books
-Mongoose: Object Data Modeling (ODM) library for MongoDB
-Nodemon: For hot-reloading during development
+- Node.js: Backend runtime
+- Express.js: Framework for building the REST API
+- MongoDB: NoSQL database for storing books
+- Mongoose: Object Data Modeling (ODM) library for MongoDB
+- Nodemon: For hot-reloading during development
 
 ## Contributing
 Contributions are welcome! Please fork this repository and submit a pull request.
