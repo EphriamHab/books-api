@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// Create a new schema for our book data with title, author, isbn, published year and isFavorite fields with validation
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -34,6 +33,5 @@ const bookSchema = new mongoose.Schema({
 
 });
 
-// Create a model from the schema
 const Book = mongoose.model('Book', bookSchema);
 export default Book;
