@@ -1,7 +1,12 @@
-import Book from "../models/book";
+import mongoose from "mongoose";
+import Book from "../models/book.js";
 
 const createBook = async (req, res) => {
-  const book = req.body;
+  const { title, author, isbn, publishedYear } = req.body;
+  if (!title || !author || !isbn || !publishedYear)
+    return res.status(400).json({ message: "All fields are required" });
+
+  const book = { title, author, isbn, publishedYear };
   const newBook = new Book(book);
 
   try {
@@ -24,11 +29,18 @@ const getBooks = async (req, res) => {
 const getBook = async (req, res) => {
   const { id } = req.params;
 
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid book ID format" });
+  }
+
   try {
     const book = await Book.findById(id);
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
     res.status(200).json(book);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -80,8 +92,7 @@ const deleteBook = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No book with that id");
 
-  await Book.findByIdAndRemove(id);
-
+  await Book.findByIdAndDelete(id);
   res.json({ message: "Book deleted successfully" });
 };
 
