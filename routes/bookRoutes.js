@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getBooks, getBook, createBook, updateBook, deleteBook, getRecommendation, markFavorite} from '../controllers/bookControllers.js';
+import { getBooks, getBook, createBook, updateBook, deleteBook, getRecommendation, markFavorite, getFavoriteBooks} from '../controllers/bookControllers.js';
 
 
 const router = express.Router();
@@ -14,6 +14,7 @@ router.get('/:id', getBook);
 router.put('/:id', updateBook);
 router.delete('/:id', deleteBook);
 router.patch('/:id/markFavorite', markFavorite);
+router.get('/favorites', getFavoriteBooks);
 
 export default router;
 
