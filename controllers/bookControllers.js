@@ -95,6 +95,8 @@ const getFavoriteBooks = async (req, res) => {
   
   try {
     const favoriteBooks = await Book.find({ isFavorite: true });
+    if (favoriteBooks.length === 0)
+      return res.status(404).json({ message: "No favorite books found" });
     res.status(200).json(favoriteBooks);
   } catch (error) {
     res.status(404).json({ message: error.message });
