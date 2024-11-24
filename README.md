@@ -59,6 +59,11 @@ A RESTful API for managing books. This API allows you to perform CRUD operations
 - Mongoose: Object Data Modeling (ODM) library for MongoDB
 - Nodemon: For hot-reloading during development
 
+## Deployment
+This project is deployed online and can be accessed using the following link:  
+[Live Server](https://bookapis.vercel.app/)
+
+
 ## Contributing
 Contributions are welcome! Please fork this repository and submit a pull request.
 
