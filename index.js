@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
       <li><a href="/books/recommendation">Get book recommendations (GET /books/recommendations)</a></li>
       <li>Mark books as favorite:</li>
       <ul>
-        <li>POST /books/:id/favorite - Mark a book as favorite</li>
+        <li>PATCH /books/:id/favorite - Mark a book as favorite</li>
         <li><a href="/books/favorites">GET /books/favorites - View favorite books</a></li>
       </ul>
     </ul>
