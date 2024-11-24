@@ -7,14 +7,14 @@ const router = express.Router();
 
 
 router.get('/recommendation', getRecommendation);
-
+router.get('/favorites', getFavoriteBooks);
 router.get('/', getBooks);
 router.post('/', createBook);
 router.get('/:id', getBook);
 router.put('/:id', updateBook);
 router.delete('/:id', deleteBook);
 router.patch('/:id/markFavorite', markFavorite);
-router.get('/favorites', getFavoriteBooks);
+
 
 export default router;
 
