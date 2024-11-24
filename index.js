@@ -10,7 +10,7 @@ const app = express();
 
 const PORT = process.env.PORT || 8000;
 const DB =
-  process.env.MONGO_URI ??
+  process.env.DATABASE_URI ??
   "mongodb+srv://ephremhabtamu2013:ephrem2013@cluster0.dtuaz.mongodb.net/book-api?retryWrites=true&w=majority";
 
 app.use(express.json({ limit: "10mb" }));
