@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Book from "../models/book.js";
 
+// create a book
 const createBook = async (req, res) => {
   const { title, author, isbn, publishedYear } = req.body;
   if (!title || !author || !isbn || !publishedYear)
@@ -17,6 +18,7 @@ const createBook = async (req, res) => {
   }
 };
 
+// get all books
 const getBooks = async (req, res) => {
   try {
     const books = await Book.find();
@@ -26,6 +28,7 @@ const getBooks = async (req, res) => {
   }
 };
 
+// get a single book
 const getBook = async (req, res) => {
   const { id } = req.params;
 
@@ -44,6 +47,7 @@ const getBook = async (req, res) => {
   }
 };
 
+// update a book
 const updateBook = async (req, res) => {
   const { id: _id } = req.params;
   const book = req.body;
@@ -60,6 +64,7 @@ const updateBook = async (req, res) => {
   res.json(updatedBook);
 };
 
+// get a random book recommendation
 const getRecommendation = async (req, res) => {
   try {
     const books = await Book.find();
