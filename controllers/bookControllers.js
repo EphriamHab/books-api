@@ -91,6 +91,16 @@ const markFavorite = async (req, res) => {
   res.json(updatedBook);
 };
 
+const getFavoriteBooks = async (req, res) => {
+  
+  try {
+    const favoriteBooks = await Book.find({ isFavorite: true });
+    res.status(200).json(favoriteBooks);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const deleteBook = async (req, res) => {
   const { id } = req.params;
 
@@ -109,4 +119,5 @@ export {
   deleteBook,
   getRecommendation,
   markFavorite,
+  getFavoriteBooks,
 };
