@@ -9,7 +9,8 @@ dotenv.config();
 const app = express();
 
 const PORT = process.env.PORT || 8000;
-const DB = process.env.MONGO_URI ?? 'mongodb://127.0.0.1:27017/book-api';
+const DB = process.env.MONGO_URI ?? "mongodb+srv://ephremhabtamu2013:ephrem2013@cluster0.dtuaz.mongodb.net/book-api?retryWrites=true&w=majority";
+
 
 app.use(express.json({limit: '10mb'}));
 app.use(cors())
@@ -17,7 +18,7 @@ app.use(cors())
 mongoose
   .connect(DB)
   .then(() => console.log("DB connection successful!"))
-  .catch((err) => console.log(err));
+  .catch((err) =>console.log(err));
 
 
 app.listen(PORT, () => {
