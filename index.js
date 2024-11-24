@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
       <li>Mark books as favorite:</li>
       <ul>
         <li>POST /books/:id/favorite - Mark a book as favorite</li>
-        <li>GET /books/favorites - View favorite books</li>
+        <li><a href="/books/favorites">GET /books/favorites - View favorite books</a></li>
       </ul>
     </ul>
     <p>To use the API, send requests to the appropriate endpoints.</p>
