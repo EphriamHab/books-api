@@ -14,7 +14,9 @@ const createBook = async (req, res) => {
     await newBook.save();
     res.status(201).json(newBook);
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    res
+      .status(500)
+      .json({ message: "Error creating book", error: error.message });
   }
 };
 
@@ -24,7 +26,9 @@ const getBooks = async (req, res) => {
     const books = await Book.find();
     res.status(200).json(books);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching books", error: error.message });
   }
 };
 
@@ -52,16 +56,27 @@ const updateBook = async (req, res) => {
   const { id: _id } = req.params;
   const book = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(_id))
-    return res.status(404).send("No book with that id");
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(400).json({ message: "Invalid book ID format" });
+  }
 
-  const updatedBook = await Book.findByIdAndUpdate(
-    _id,
-    { ...book, _id },
-    { new: true }
-  );
+  try {
+    const updatedBook = await Book.findByIdAndUpdate(
+      _id,
+      { ...book, _id },
+      { new: true }
+    );
 
-  res.json(updatedBook);
+    if (!updatedBook) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    res.status(200).json(updatedBook);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error updating book", error: error.message });
+  }
 };
 
 // get a random book recommendation
@@ -79,38 +94,48 @@ const getRecommendation = async (req, res) => {
 
 // mark a book as favorite
 const markFavorite = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send("No book with that id");
-  const book = await Book.findById(id);
-  const updatedBook = await Book.findByIdAndUpdate(
-    id,
-    { isFavorite: !book.isFavorite },
-    { new: true }
-  );
-  res.json(updatedBook);
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(404).send("No book with that id");
+    const book = await Book.findById(id);
+    const updatedBook = await Book.findByIdAndUpdate(
+      id,
+      { isFavorite: !book.isFavorite },
+      { new: true }
+    );
+    res.status(200).json(updatedBook);
+  } catch (error) {
+     res.status(500).json({message: error.message})
+  }
+
 };
 
 const getFavoriteBooks = async (req, res) => {
-  
   try {
     const favoriteBooks = await Book.find({ isFavorite: true });
     if (favoriteBooks.length === 0)
       return res.status(404).json({ message: "No favorite books found" });
     res.status(200).json(favoriteBooks);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
 const deleteBook = async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send("No book with that id");
-
-  await Book.findByIdAndDelete(id);
-  res.json({ message: "Book deleted successfully" });
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).send("No book with that id");
+    }
+    const book = await Book.findByIdAndDelete(id);
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+    res.status(200).json({ message: "Book deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export {
