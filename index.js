@@ -29,25 +29,26 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
   res.send(`
     <h1>Welcome to the Book API</h1>
-    <p>This API allows you to manage a collection of books and explore recommendations. Below are the available routes:</p>
+    <p>This API allows you to manage a collection of books, explore recommendations, and perform CRUD operations based on authentication and roles.</p>
     <ul>
-      <li><a href="/books">View all books (GET /books)</a></li>
       <li>Manage books with CRUD operations:</li>
       <ul>
-        <li>GET /books - Retrieve all books</li>
-        <li>POST /books - Add a new book</li>
-        <li>GET /books/:id - Retrieve a specific book by ID</li>
+        <li>GET /books/all - Retrieve all books (Admin only)</li>
+        <li>POST /books - Add a new book (User only)</li>
+        <li>GET /books/:id - Retrieve a specific book by ID (User only)</li>
         <li>PUT /books/:id - Update a book by ID</li>
-        <li>DELETE /books/:id - Delete a book by ID</li>
+        <li>DELETE /books/:id - Delete a book by ID (Admin only)</li>
       </ul>
       <li><a href="/books/recommendation">Get book recommendations (GET /books/recommendations)</a></li>
       <li>Mark books as favorite:</li>
       <ul>
-        <li>PATCH /books/:id/favorite - Mark a book as favorite</li>
-        <li><a href="/books/favorites">GET /books/favorites - View favorite books</a></li>
+        <li>PATCH /books/:id/markFavorite - Mark a book as favorite (User only)</li>
+        <li><a href="/books/favorites">GET /books/favorites - View favorite books (User only)</a></li>
       </ul>
+      <li><a href="/auth/signup">Sign Up (POST /auth/signup)</a></li>
+      <li><a href="/auth/login">Login (POST /auth/login)</a></li>
     </ul>
-    <p>To use the API, send requests to the appropriate endpoints.</p>
+    <p>To use the API, authenticate with the login credentials and perform authorized actions based on your role (user/admin).</p>
   `);
 });
 
