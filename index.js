@@ -11,8 +11,7 @@ const app = express();
 
 const PORT = process.env.PORT || 8000;
 const DB =
-  process.env.DATABASE_URI ??
-  "mongodb+srv://ephremhabtamu2013:ephrem2013@cluster0.dtuaz.mongodb.net/book-api?retryWrites=true&w=majority";
+  process.env.DATABASE_URI
 
 app.use(express.json({ limit: "10mb" }));
 app.use(cors());
@@ -45,8 +44,8 @@ app.get("/", (req, res) => {
         <li>PATCH /books/:id/markFavorite - Mark a book as favorite (User only)</li>
         <li><a href="/books/favorites">GET /books/favorites - View favorite books (User only)</a></li>
       </ul>
-      <li><a href="/auth/signup">Sign Up (POST /auth/signup)</a></li>
-      <li><a href="/auth/login">Login (POST /auth/login)</a></li>
+      <li>Sign Up (POST /auth/signup)</li>
+      <li>Login (POST /auth/login)</li>
     </ul>
     <p>To use the API, authenticate with the login credentials and perform authorized actions based on your role (user/admin).</p>
   `);
