@@ -18,7 +18,7 @@ export const signup = async (req, res) => {
     const user = new User({ name, email, password, role });
     await user.save();
     const token = generateToken(user._id, user.role);
-    res.status(201).json({ token, user: { id: user._id, role: user.role } });
+    res.status(201).json(user);
   } catch (error) {
     res
       .status(500)
@@ -39,4 +39,3 @@ export const login = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
