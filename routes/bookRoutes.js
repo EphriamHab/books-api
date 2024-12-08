@@ -12,9 +12,9 @@ router.get('/all', protect, authorize('admin'), getBooks);
 
 router.post('/', protect, authorize('user'), createBook);
 router.get('/:id', protect, getBook);
-router.put('/:id', protect, authorize('user'), updateBook);
+router.put('/:id', protect, updateBook);
 router.delete('/:id', protect, authorize('admin'), deleteBook);
-router.patch('/:id/markFavorite', markFavorite);
+router.patch('/:id/markFavorite', protect, markFavorite);
 
 
 
