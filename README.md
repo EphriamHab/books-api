@@ -75,9 +75,9 @@ A RESTful API for managing books. This API allows you to perform CRUD operations
 |--------|---------------|-------------------------------|
 | GET    | `/books/all`      | Retrieve all books (Admin only)           |
 | GET    | `/books/:id`  | Retrieve a specific book by ID|
-| POST   | `/books`      | Create a new book (User only)            |
-| PATCH  | `/books/:id`  | Update an existing book (User only)      |
-| DELETE | `/books/:id`  | Delete a book by ID (Admin only)          |
+| POST   | `/books`      | Create a new book             |
+| PATCH  | `/books/:id`  | Update an existing book       |
+| DELETE | `/books/:id`  | Delete a book by ID           |
 
 ### Favorite
 
