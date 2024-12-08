@@ -68,6 +68,7 @@ A RESTful API for managing books. This API allows you to perform CRUD operations
     "role": "user"
   }
 }
+```
 
 ### Books API
 
