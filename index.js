@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import bookRoutes from "./routes/bookRoutes.js";
+import authRoutes from "./routes/authRoutes.js";  
 
 dotenv.config();
 
@@ -50,4 +51,5 @@ app.get("/", (req, res) => {
   `);
 });
 
+app.use("/auth", authRoutes);
 app.use("/books", bookRoutes);
