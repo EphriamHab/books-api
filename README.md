@@ -1,8 +1,10 @@
 # Books API
 
-A RESTful API for managing books. This API allows you to perform CRUD operations on books, mark books as favorites, and get random book recommendations.
+A RESTful API for managing books, with role-based authentication and authorization. This API allows users to perform CRUD operations on books, mark books as favorites, and get random book recommendations.
 
 ## Features
+- **User Authentication** (Signup and Login)
+- **Role-Based Access Control (RBAC)** (Admin and User roles)
 - **Create** a new book
 - **Read** all books or a specific book
 - **Update** book details
@@ -28,6 +30,8 @@ A RESTful API for managing books. This API allows you to perform CRUD operations
    npm start
 
 ## API Endpoints
+### Base URL
+  - https://books-api-self.vercel.app/
 
 ## Authentication API
 
@@ -92,6 +96,38 @@ A RESTful API for managing books. This API allows you to perform CRUD operations
 |--------|-------------------------|-------------------------------|
 | GET    | `/books/recommendation` | Get a random book recommendation |
 
+## Role-Based Access Control (RBAC)
+
+### Admin: Can perform the following actions:
+- **Retrieve all books**: `GET /books/all`
+- **Delete books**: `DELETE /books/:id`
+
+### User: Can perform the following actions:
+- **Create books**: `POST /books`
+- **Retrieve a specific book**: `GET /books/:id`
+- **Update books**: `PUT /books/:id`
+- **Mark or unmark books as favorites**: `PATCH /books/:id/markFavorite`
+- **Retrieve favorite books**: `GET /books/favorites`
+- **Get book recommendations**: `GET /books/recommendation`
+
+### Additional Notes:
+- **Admin-Only Routes**:
+  - `/books/all`: Accessible only by admins. Retrieves all books in the system.
+  - `/books/:id`: Admins can delete specific books by their ID.
+  
+- **User-Accessible Routes**:
+  - `/books`: Users can fetch books based on user-specific criteria or general books (if unrestricted).
+  - `/books/favorites`: Users can view their favorite books.
+  - `/books/recommendation`: Users can retrieve book recommendations tailored to their preferences.
+
+### Shared Routes:
+- `/books/:id`: Users and admins can view a specific book by its ID.
+- `/books/:id`: Users and admins can update a book by its ID.
+- `/books/:id/markFavorite`: Both users and admins can mark or unmark books as favorites.
+
+### Authentication and Authorization:
+- **Protect**: Routes are protected and require the user to be authenticated using JWT.
+- **Authorize**: Routes have role-based access, allowing only users with specific roles (e.g., `user`, `admin`) to perform certain actions.
 
 ## Technologies Used
 - Node.js: Backend runtime
@@ -104,7 +140,7 @@ A RESTful API for managing books. This API allows you to perform CRUD operations
 
 ## Deployment
 This project is deployed online and can be accessed using the following link:  
-[Live Server](https://bookapis.vercel.app/)
+[Live Server](https://books-api-self.vercel.app/)
 
 
 ## Contributing
