@@ -34,7 +34,8 @@ app.get("/", (req, res) => {
       <ul>
         <li>GET /books/all - Retrieve all books (Admin only)</li>
         <li>POST /books - Add a new book (User only)</li>
-        <li>GET /books/:id - Retrieve a specific book by ID (User only)</li>
+        <li>GET /books - Retrieve all books (User and Admin)</li>
+        <li>GET /books/:id - Retrieve a specific book by ID</li>
         <li>PUT /books/:id - Update a book by ID</li>
         <li>DELETE /books/:id - Delete a book by ID (Admin only)</li>
       </ul>
